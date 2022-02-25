@@ -125,11 +125,12 @@ const requestParams = computed(() => {
   const { sortBy, descending, rowsPerPage, page } = pagination.value
   const _city = cities.length ? { city: cities } : {}
   const _delivery = delivery ? { delivery_date: delivery } : {}
-  const _status = status ? { order_status: status } : {}
-  const _payment = payment ? { financial_status: payment } : {}
-  const _fulfillment = fulfillment ? { fulfillment_status: fulfillment } : {}
+  const _status = status && status !== 'all' ? { order_status: status } : {}
+  const _payment = payment && payment !== 'all' ? { financial_status: payment } : {}
+  const _fulfillment = fulfillment && fulfillment !== 'all' ? { fulfillment_status: fulfillment } : {}
   const _sortBy = sortBy ? { sort_by: sortBy } : {}
   const _descending = typeof descending === 'boolean' ? { is_descending: descending } : {}
+  const _size = rowsPerPage ? { size: rowsPerPage } : {}
 
   return {
     ..._city,
@@ -139,7 +140,7 @@ const requestParams = computed(() => {
     ..._fulfillment,
     ..._sortBy,
     ..._descending,
-    size: rowsPerPage,
+    ..._size,
     page: page - 1
   }
 })
