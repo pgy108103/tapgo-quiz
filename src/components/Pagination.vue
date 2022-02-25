@@ -13,7 +13,7 @@
         @update:model-value="onChange"
       />
     </div>
-    <span>{{ rangeText }}</span>
+    <span v-if="pageTotal">{{ rangeText }}</span>
     <div>
       <q-btn
         icon="first_page"
@@ -32,6 +32,7 @@
         dense
         flat
         :disabled="isFirstPage"
+        v-if="pageTotal"
         @click="onPage(pagination.page - 1)"
       />
       <q-btn
@@ -41,6 +42,7 @@
         dense
         flat
         :disabled="isLastPage"
+        v-if="pageTotal"
         @click="onPage(pagination.page + 1)"
       />
       <q-btn
