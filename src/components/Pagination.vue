@@ -14,7 +14,7 @@
       />
     </div>
     <span v-if="pageTotal">{{ rangeText }}</span>
-    <div>
+    <div v-if="pagination.rowsPerPage">
       <q-btn
         icon="first_page"
         color="grey-8"
@@ -92,7 +92,7 @@ const isLastPage = computed(() => props.pagination.page === pageTotal.value)
 const rangeText = computed(() => {
   const { page, rowsPerPage, rowsNumber } = props.pagination
   const start = (page - 1) * rowsPerPage + 1
-  let end = start + rowsPerPage
+  let end = rowsPerPage ? start + rowsPerPage - 1 : rowsNumber
 
   if (end > rowsNumber) {
     end = rowsNumber

@@ -130,7 +130,6 @@ const requestParams = computed(() => {
   const _fulfillment = fulfillment && fulfillment !== 'all' ? { fulfillment_status: fulfillment } : {}
   const _sortBy = sortBy ? { sort_by: sortBy } : {}
   const _descending = typeof descending === 'boolean' ? { is_descending: descending } : {}
-  const _size = rowsPerPage ? { size: rowsPerPage } : {}
 
   return {
     ..._city,
@@ -140,7 +139,7 @@ const requestParams = computed(() => {
     ..._fulfillment,
     ..._sortBy,
     ..._descending,
-    ..._size,
+    size: rowsPerPage,
     page: page - 1
   }
 })
